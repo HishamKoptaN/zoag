@@ -60,10 +60,10 @@ class _HomeViewDeskState extends State<HomeViewDesk> {
                               right: 30.w,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(25),
-                                child: Image.network(
+                                child: Image.asset(
                                   height: 450.r,
                                   width: 450.r,
-                                  'assets/1st page.png',
+                                  'assets/images/1st_page.png',
                                   fit: BoxFit.cover,
                                 ),
                               ),
@@ -77,7 +77,7 @@ class _HomeViewDeskState extends State<HomeViewDesk> {
                                 child: Column(
                                   children: [
                                     MyText(
-                                      fieldName: 'اهلا, بك في منصة ازواج',
+                                      fieldName: 'اهلا بك , في منصة ازوأچ',
                                       fontSize: 65.r,
                                       color:
                                           const Color.fromARGB(255, 5, 27, 45),
@@ -94,7 +94,16 @@ class _HomeViewDeskState extends State<HomeViewDesk> {
                                       fontWeight: FontWeight.w100,
                                     ),
                                     SizedBox(
-                                      height: 100.h,
+                                      height: 60.h,
+                                    ),
+                                    MyText(
+                                      fieldName: 'ابدأ بالبحث علي شريك حياتك',
+                                      fontSize: 35.r,
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.w100,
+                                    ),
+                                    SizedBox(
+                                      height: 20.h,
                                     ),
                                     Consumer<HomeProvDesktop>(
                                       builder: (BuildContext context,
@@ -109,8 +118,8 @@ class _HomeViewDeskState extends State<HomeViewDesk> {
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(80),
-                                                child: Image.network(
-                                                  'assets/man.jpg',
+                                                child: Image.asset(
+                                                  'assets/images/man.jpg',
                                                   width: 125.r,
                                                   height: 125.r,
                                                   fit: BoxFit.cover,
@@ -122,8 +131,8 @@ class _HomeViewDeskState extends State<HomeViewDesk> {
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(80),
-                                                child: Image.network(
-                                                  'assets/women.jpg',
+                                                child: Image.asset(
+                                                  'assets/images/women.jpg',
                                                   width: 125.r,
                                                   height: 125.r,
                                                   fit: BoxFit.cover,

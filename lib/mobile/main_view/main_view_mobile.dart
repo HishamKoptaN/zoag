@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import '../add_order/order_desk_view.dart';
+import 'package:provider/provider.dart';
+import '../../desktop/add_order/order_desk_view.dart';
+import '../../desktop/home/home_prov.dart';
+import '../add_order/order_mobile_view.dart';
 import '../home/home_view_mobile.dart';
 import '../home/widget.dart';
+import '../selecet_gander/select_gander_mobile.dart';
 
 class MainViewMobile extends StatefulWidget {
   const MainViewMobile({Key? key}) : super(key: key);
@@ -41,182 +44,122 @@ class _MainViewMobileState extends State<MainViewMobile> {
           child: Center(
             child: SingleChildScrollView(
               physics: const BouncingScrollPhysics(),
-              child: SizedBox(
-                height: 2800,
-                width: width,
-                child: Column(
-                  children: [
-                    Container(
-                      height: 50.h,
-                      color: Colors.black,
-                      child: Center(
-                        child: MyTextMobile(
-                          textAlign: TextAlign.center,
-                          fieldName:
-                              "  يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا ۚ إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ ۚ إِنَّ اللَّهَ عَلِيمٌ خَبِيرٌ  ",
-                          fontSize: 17.r,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              child: Consumer<HomeProvDesktop>(
+                builder: (BuildContext context, HomeProvDesktop value,
+                    Widget? child) {
+                  return SizedBox(
+                    height: 2200,
+                    width: width,
+                    child: Column(
                       children: [
-                        SizedBox(
-                          width: 5.w,
-                        ),
-                        GestureDetector(
-                          onTap: () {},
-                          child: Image.network(
-                            color: const Color.fromARGB(255, 4, 38, 65),
-                            'assets/logo.png',
-                            height: 55,
-                            width: 55,
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            color: Colors.black,
+                            child: Center(
+                              child: MyTextMobile(
+                                textAlign: TextAlign.center,
+                                fieldName:
+                                    "يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا ۚ",
+                                fontSize: 17.r,
+                                color: Colors.white,
+                                fontWeight: FontWeight.w300,
+                              ),
+                            ),
                           ),
                         ),
-                        SizedBox(
-                          width: 100.w,
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            Scrollable.ensureVisible(
-                              sendUskey.currentContext!,
-                              duration: const Duration(seconds: 1),
-                            );
-                          },
+                        Expanded(
+                          flex: 5,
+                          key: homeKey,
                           child: Container(
-                            width: 70.w,
-                            height: 30.h,
+                            width: width,
                             decoration: BoxDecoration(
                               color: Colors.white,
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(30),
                               boxShadow: const [
                                 BoxShadow(
-                                  color: Colors.black,
+                                  color: Color.fromARGB(183, 255, 255, 255),
                                   offset: Offset(1, 1),
                                 ),
                               ],
                             ),
-                            child: const MyTextMobile(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w400,
-                              color: Colors.black,
-                              fieldName: 'تواصل معنا',
+                            child: HomeViewMobile(
+                              key: homeKey,
+                              onTap: () {
+                                Scrollable.ensureVisible(
+                                  addOrderkey.currentContext!,
+                                  duration: const Duration(seconds: 2),
+                                );
+                              },
                             ),
                           ),
                         ),
-                        SizedBox(
-                          width: 10.w,
+                        Expanded(
+                          flex: 3,
+                          child: SizedBox(
+                            child: SelectGanderMobile(
+                              maleOnTap: () {
+                                value.selectMale();
+                              },
+                              femaleOnTap: () {
+                                value.selectFemale();
+                              },
+                              male: value.male,
+                              female: value.female,
+                            ),
+                          ),
                         ),
+                        isMobile
+                            ? Expanded(
+                                flex: 16,
+                                child: Consumer<HomeProvDesktop>(
+                                  builder: (context, value, child) {
+                                    return Stack(
+                                      children: [
+                                        SizedBox(
+                                          key: addOrderkey,
+                                          width: width,
+                                          child: OrderViewMobile(
+                                            key: homeKey,
+                                          ),
+                                        ),
+                                        value.isLoading
+                                            ? Container(
+                                                color: const Color.fromARGB(
+                                                    213, 255, 255, 255),
+                                                width: width,
+                                                child: Center(
+                                                  child: Column(
+                                                    children: [
+                                                      const Spacer(flex: 5),
+                                                      const CircularProgressIndicator(
+                                                        color: Colors.green,
+                                                      ),
+                                                      const Spacer(flex: 1),
+                                                      MyTextMobile(
+                                                        fieldName:
+                                                            'جاري رفع الطلب',
+                                                        fontSize: 30.r,
+                                                        color: Colors.black,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                      const Spacer(flex: 4),
+                                                    ],
+                                                  ),
+                                                ),
+                                              )
+                                            : const SizedBox(),
+                                      ],
+                                    );
+                                  },
+                                ),
+                              )
+                            : Expanded(flex: 16, child: OrderViewDesk())
                       ],
                     ),
-                    SizedBox(
-                      height: 10.w,
-                    ),
-                    Container(
-                      key: homeKey,
-                      height: 675.h,
-                      width: width,
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(30),
-                        boxShadow: const [
-                          BoxShadow(
-                            color: Color.fromARGB(183, 255, 255, 255),
-                            offset: Offset(1, 1),
-                          ),
-                        ],
-                      ),
-                      child: HomeViewMobile(
-                        key: homeKey,
-                        onTap: () {
-                          Scrollable.ensureVisible(
-                            addOrderkey.currentContext!,
-                            duration: const Duration(seconds: 2),
-                          );
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      key: addOrderkey,
-                      height: 2000,
-                      width: width,
-                      child: OrderViewMobile(
-                        key: homeKey,
-                      ),
-                    ),
-                    Container(
-                      height: 70.h,
-                      width: width,
-                      key: sendUskey,
-                      alignment: Alignment.center,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          const SizedBox(
-                            width: 10,
-                          ),
-                          Row(
-                            children: [
-                              IconButton(
-                                onPressed: () {},
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.envelope,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.linkedinIn,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.facebook,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              IconButton(
-                                onPressed: () {},
-                                icon: const FaIcon(
-                                  FontAwesomeIcons.whatsapp,
-                                  color: Colors.black,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 85.w,
-                              ),
-                              InkWell(
-                                onTap: () {
-                                  Scrollable.ensureVisible(
-                                    homeKey.currentContext!,
-                                    duration: const Duration(seconds: 1500),
-                                  );
-                                },
-                                child: Container(
-                                  height: 20,
-                                  width: 50,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(5),
-                                    color: const Color(0xff4220A3),
-                                  ),
-                                  child: const Icon(
-                                    Icons.expand_less,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
+                  );
+                },
               ),
             ),
           ),

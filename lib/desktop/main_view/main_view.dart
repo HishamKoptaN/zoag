@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
 import '../add_order/order_desk_view.dart';
-import '../home/home_view.dart';
+import '../home/home_prov.dart';
+import '../home/home_view_desktop.dart';
 import '../home/widget.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 class MainViewDesk extends StatefulWidget {
   const MainViewDesk({Key? key}) : super(key: key);
@@ -27,7 +30,6 @@ class _MainViewDeskState extends State<MainViewDesk> {
   final sendUskey = GlobalKey();
   final whoUsKey = GlobalKey();
   final footerkey = GlobalKey();
-
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -39,7 +41,7 @@ class _MainViewDeskState extends State<MainViewDesk> {
         title: const MyText(
           textDirection: TextDirection.rtl,
           fieldName:
-              "  يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا ۚ إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ ۚ إِنَّ اللَّهَ عَلِيمٌ خَبِيرٌ  ",
+              "﴿  يَا أَيُّهَا النَّاسُ إِنَّا خَلَقْنَاكُم مِّن ذَكَرٍ وَأُنثَىٰ وَجَعَلْنَاكُمْ شُعُوبًا وَقَبَائِلَ لِتَعَارَفُوا ۚ إِنَّ أَكْرَمَكُمْ عِندَ اللَّهِ أَتْقَاكُمْ ۚ إِنَّ اللَّهَ عَلِيمٌ خَبِيرٌ ﴾ ",
           fontSize: 20,
           color: Colors.white,
           fontWeight: FontWeight.w300,
@@ -67,9 +69,9 @@ class _MainViewDeskState extends State<MainViewDesk> {
                             ),
                             GestureDetector(
                               onTap: () {},
-                              child: Image.network(
+                              child: Image.asset(
                                 color: const Color.fromARGB(255, 4, 38, 65),
-                                'assets/logo.png',
+                                'assets/images/logo.png',
                                 height: 70,
                                 width: 70,
                               ),
@@ -136,13 +138,46 @@ class _MainViewDeskState extends State<MainViewDesk> {
                         },
                       ),
                     ),
-                    SizedBox(
-                      key: addOrderkey,
-                      height: 700,
-                      width: width,
-                      child: OrderViewDesk(
-                        key: homeKey,
-                      ),
+                    Consumer<HomeProvDesktop>(
+                      builder: (context, value, child) {
+                        return Stack(
+                          children: [
+                            SizedBox(
+                              key: addOrderkey,
+                              height: 900,
+                              width: width,
+                              child: OrderViewDesk(
+                                key: homeKey,
+                              ),
+                            ),
+                            value.isLoading
+                                ? Container(
+                                    color: Color.fromARGB(213, 255, 255, 255),
+                                    height: 900,
+                                    width: width,
+                                    child: Center(
+                                      child: Column(
+                                        children: [
+                                          const Spacer(flex: 5),
+                                          const CircularProgressIndicator(
+                                            color: Colors.green,
+                                          ),
+                                          const Spacer(flex: 1),
+                                          MyText(
+                                            fieldName: 'جاري رفع الطلب',
+                                            fontSize: 30.r,
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                          const Spacer(flex: 4),
+                                        ],
+                                      ),
+                                    ),
+                                  )
+                                : SizedBox()
+                          ],
+                        );
+                      },
                     ),
                     Container(
                       height: 70.h,

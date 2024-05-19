@@ -4,10 +4,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'firebase_options.dart';
 import 'desktop/home/home_prov.dart';
+import 'firebase_options.dart';
 import 'desktop/main_view/main_view.dart';
-import 'mobile/home/home_prov.dart';
 import 'mobile/main_view/main_view_mobile.dart';
 
 bool isMobile = false;
@@ -46,7 +45,6 @@ class MyApp extends StatelessWidget {
         child: MultiProvider(
           providers: [
             ChangeNotifierProvider(create: (_) => HomeProvDesktop()),
-            ChangeNotifierProvider(create: (_) => HomeProvMbile()),
           ],
           child: MaterialApp(
             title: 'أزواج',
