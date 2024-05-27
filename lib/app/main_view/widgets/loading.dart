@@ -1,7 +1,7 @@
-import 'package:Azoag/app/provider/home_prov.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import '../../provider/home_prov.dart';
 import 'widgets.dart';
 
 class Loading extends StatelessWidget {

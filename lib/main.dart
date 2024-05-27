@@ -7,19 +7,14 @@ import 'app/provider/home_prov.dart';
 import 'constants/firebase_options.dart';
 import 'app/main_view.dart';
 import 'constants/responsive.dart';
+import 'test_three.dart';
 
 bool isMobile = false;
 Future<void> main() async {
-  try {
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
-  } catch (e) {
-    if (kDebugMode) {
-      print(e);
-    }
-  }
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(
     const MyApp(),
   );
@@ -63,17 +58,15 @@ class MyApp extends StatelessWidget {
 
     ScreenUtil.init(context);
     getDeviceType(width);
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: MultiProvider(
-        providers: [
-          ChangeNotifierProvider(create: (_) => HomeProvider()),
-        ],
-        child: const MaterialApp(
-            title: 'أزواج',
-            debugShowCheckedModeBanner: false,
-            home: Expanded(child: MainPage())),
+    return MaterialApp(
+      title: 'أزواج',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      debugShowCheckedModeBanner: false,
+      home: MultiProvider(providers: [
+        ChangeNotifierProvider(create: (_) => HomeProvider()),
+      ], child: CounterPage()),
     );
   }
 }

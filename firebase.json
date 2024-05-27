@@ -1,27 +1,4 @@
 {
-  "flutter": {
-    "platforms": {
-      "android": {
-        "default": {
-          "projectId": "my-site-goaz  ",
-          "appId": "1:75993923403:android:62c5cc985551329654f2ce",
-          "fileOutput": "android/app/google-services.json"
-        }
-      },
-      "dart": {
-        "lib/firebase_options.dart": {
-          "projectId": "my-site-goaz",
-          "configurations": {
-            "android": "1:75993923403:android:62c5cc985551329654f2ce",
-            "ios": "1:75993923403:ios:769d6268430c590a54f2ce",
-            "macos": "1:75993923403:ios:769d6268430c590a54f2ce",
-            "web": "1:75993923403:web:5b552f4d9f01f74a54f2ce",
-            "windows": "1:75993923403:web:dece4e44d5c0234354f2ce"
-          }
-        }
-      }
-    }
-  },
   "hosting": {
     "public": "build/web",
     "ignore": [

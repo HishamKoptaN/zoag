@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "75993923403",
-    "project_id": "maazon-6aa57",
-    "storage_bucket": "maazon-6aa57.appspot.com"
+    "project_number": "727111486239",
+    "project_id": "gwaz-b098e",
+    "storage_bucket": "gwaz-b098e.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:75993923403:android:62c5cc985551329654f2ce",
+        "mobilesdk_app_id": "1:727111486239:android:f9cc5cd3cb848b0945fe2a",
         "android_client_info": {
-          "package_name": "com.example.maazon"
+          "package_name": "com.example.maezon"
         }
       },
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDX4w-YUSGZCuBZi_YIARqTPK_9HiEV9RI"
+          "current_key": "AIzaSyAmuNZU1g8-fhr9x-syh-m2v7HLbRSr8nI"
         }
       ],
       "services": {
